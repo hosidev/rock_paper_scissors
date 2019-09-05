@@ -1,11 +1,19 @@
+function playerPlay() {
+	playerChoice = prompt('what do you choose ? rock , paper or scissors ?!').toString();
+	return playerChoice ;
+}
+
 function computerPlay() {
 	const OPTIONS = ['rock','paper','scissors'];
 	let randomNumber = Math.floor(Math.random() * 3)
 	return OPTIONS[randomNumber];
 }
 
-let computerSelection ;
-let playerSelection ; 
+
+let computerSelection = computerPlay() ;
+let playerSelection = playerPlay();
+
+
 
 function playRound(computerSelection,playerSelection) {
 	if (playerSelection == 'rock' )  {
@@ -41,7 +49,8 @@ function game() {
 
 	let computerScore = 0;
 	let userScore = 0;
-	while (userScore + computerScore < 5) {
+	let gameOver= false;
+	while (gameOver != true) {
 		let roundResult = playRound(computerSelection,playerSelection);
 		if (roundResult == 'computer') {
 			console.log(`Computer selected ${computerSelection} while player selected ${playerSelection}, Hence 
@@ -56,18 +65,16 @@ function game() {
 				it is a draw`)
 		}
 		console.log(`Computer: ${computerScore} - User: ${userScore}`)
-		if (userScore + computerScore == 5 ){
-			if (userScore > computerScore ){
+		if (userScore == 5){
 				console.log('User won');
-			} else {
+				gameOver = true;
+			} else if (computerScore == 5){
 				console.log('computer won');
-			}
+				gameOver = true;
 		}
-		playerSelection = prompt('what do you choose ? rock , paper or scissors ?!').toString();
 		computerSelection =  computerPlay();
+		playerSelection = playerPlay();
+		}
 	}
-	
-
-}
 
 game();
